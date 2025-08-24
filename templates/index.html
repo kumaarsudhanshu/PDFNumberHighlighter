@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>PDF Number Highlighter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
@@ -41,46 +42,18 @@
       position: relative;
       overflow: hidden;
       transition: background 0.5s ease, color 0.5s ease;
+      padding: 20px;
     }
     body.dark-mode {
       background: linear-gradient(180deg, var(--color-bg-dark-start), var(--color-bg-dark-end));
       color: var(--color-text-dark);
     }
 
-    /* Clouds */
-    .cloud {
-      position: absolute;
-      background: var(--cloud-light);
-      border-radius: 50%;
-      filter: blur(12px);
-      opacity: 0.62;
-      z-index: 0;
-      pointer-events: none;
-      animation: cloud-float 23s linear infinite;
-      transition: background 0.5s ease, opacity 0.5s ease;
-    }
-
-    body.dark-mode .cloud {
-      background: var(--cloud-dark);
-      opacity: 0.38;
-    }
-
-    .cloud1 { width: 220px; height: 70px; top: 22%; left: 10%; }
-    .cloud2 { width: 150px; height: 50px; top: 36%; left: 80%; }
-    .cloud3 { width: 320px; height: 80px; top: 68%; left: 23%; }
-    .cloud4 { width: 110px; height: 42px; top: 60%; left: 64%; }
-
-    @keyframes cloud-float {
-      0% { transform: translateY(0) scaleX(1.1); }
-      50% { transform: translateY(-12px) scaleX(1.09); }
-      100% { transform: translateY(0) scaleX(1.1); }
-    }
-
     .container {
       background: var(--container-bg-light);
       padding: 30px 32px;
       border-radius: 18px;
-      box-shadow: 0 8px 32px rgba(97,162,222,0.18);
+      box-shadow: 0 8px 32px rgba(97, 162, 222, 0.18);
       max-width: 440px;
       width: 100%;
       text-align: center;
@@ -91,13 +64,13 @@
     }
     body.dark-mode .container {
       background: var(--container-bg-dark);
-      box-shadow: 0 8px 32px rgba(15,33,62,0.7);
+      box-shadow: 0 8px 32px rgba(15, 33, 62, 0.7);
     }
 
     h2 {
       color: #1966c1;
       margin-bottom: 22px;
-      font-weight: bold;
+      font-weight: 700;
       letter-spacing: 0.5px;
       transition: color 0.5s ease;
     }
@@ -117,7 +90,8 @@
       color: #c3cfe0;
     }
 
-    input[type="file"], input[type="text"] {
+    input[type="file"],
+    input[type="text"] {
       width: 100%;
       margin: 8px 0;
       padding: 12px 11px;
@@ -129,12 +103,14 @@
       font-size: 15px;
       color: var(--color-text-light);
     }
-    body.dark-mode input[type="file"], body.dark-mode input[type="text"] {
+    body.dark-mode input[type="file"],
+    body.dark-mode input[type="text"] {
       background-color: #1b2438;
       color: var(--color-text-dark);
       border-color: var(--border-dark);
     }
-    input[type="file"]:hover, input[type="text"]:focus {
+    input[type="file"]:hover,
+    input[type="text"]:focus {
       border-color: var(--color-bg-dark-start);
       background-color: #eef6fb;
       color: var(--color-text-light);
@@ -157,13 +133,13 @@
       cursor: pointer;
       font-size: 17px;
       font-weight: 600;
-      box-shadow: 0 4px 12px rgba(39,84,167,0.09);
+      box-shadow: 0 4px 12px rgba(39, 84, 167, 0.09);
       transition: background 0.3s, transform 0.2s;
       user-select: none;
     }
     body.dark-mode button {
       background: var(--button-gradient-dark);
-      box-shadow: 0 4px 12px rgba(16,37,71,0.7);
+      box-shadow: 0 4px 12px rgba(16, 37, 71, 0.7);
     }
     button:hover {
       background: linear-gradient(90deg, #0d47a1 60%, #51a7ef 100%);
@@ -172,7 +148,7 @@
 
     .message {
       margin-top: 18px;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 1.1em;
       text-align: center;
       user-select: text;
@@ -223,72 +199,10 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }
     .toggle-switch input:checked + label {
-      background: var(--color-primary);
+      background: #467ad1;
     }
     .toggle-switch input:checked + label:after {
       left: calc(100% - 26px);
-    }
-
-    /* Sun and Moon Icon */
-    .dark-icon {
-      position: relative;
-      width: 28px;
-      height: 28px;
-      cursor: pointer;
-      transition: transform 0.4s ease;
-      user-select: none;
-    }
-
-    /* Sun */
-    .sun {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 18px;
-      height: 18px;
-      margin: -9px 0 0 -9px;
-      background: #ffd93b;
-      border-radius: 50%;
-      box-shadow:
-        0 -9px 0 #ffd93b,
-        0 9px 0 #ffd93b,
-        9px 0 0 #ffd93b,
-        -9px 0 0 #ffd93b,
-        6.36px 6.36px 0 #ffd93b,
-        -6.36px 6.36px 0 #ffd93b,
-        6.36px -6.36px 0 #ffd93b,
-        -6.36px -6.36px 0 #ffd93b;
-      transition: opacity 0.4s ease;
-      transform-origin: center;
-      z-index: 2;
-    }
-
-    /* Moon */
-    .moon {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 18px;
-      height: 18px;
-      margin: -9px 0 0 -9px;
-      background: #f0f0f3;
-      border-radius: 50%;
-      box-shadow: -6px 0 0 0 var(--color-bg-dark-end);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      transform-origin: center;
-      z-index: 1;
-    }
-
-    body.dark-mode .sun {
-      opacity: 0;
-      transform: rotate(40deg) scale(0.8);
-      z-index: 1;
-    }
-    body.dark-mode .moon {
-      opacity: 1;
-      transform: rotate(40deg) scale(1);
-      z-index: 2;
     }
 
   </style>
@@ -297,10 +211,6 @@
   <div class="toggle-switch" title="Toggle Dark Mode">
     <input type="checkbox" id="darkModeToggle" />
     <label for="darkModeToggle"></label>
-    <div class="dark-icon" aria-hidden="true">
-      <div class="sun"></div>
-      <div class="moon"></div>
-    </div>
   </div>
 
   <div class="container">
@@ -322,22 +232,19 @@
 
   <script>
     const toggleInput = document.getElementById('darkModeToggle');
-    const toggleSwitch = toggleInput.parentElement;
 
-    toggleInput.addEventListener('change', () => {
-      document.body.classList.toggle('dark-mode', toggleInput.checked);
+    // On load, apply saved preference
+    window.addEventListener('DOMContentLoaded', () => {
+      const darkModeSaved = localStorage.getItem('darkMode') === 'true';
+      toggleInput.checked = darkModeSaved;
+      document.body.classList.toggle('dark-mode', darkModeSaved);
     });
 
-    window.onload = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved === 'true') {
-        toggleInput.checked = true;
-        document.body.classList.add('dark-mode');
-      }
-    };
-
+    // Toggle dark mode and save preference
     toggleInput.addEventListener('change', () => {
-      localStorage.setItem('darkMode', toggleInput.checked);
+      const isDark = toggleInput.checked;
+      document.body.classList.toggle('dark-mode', isDark);
+      localStorage.setItem('darkMode', isDark);
     });
   </script>
 </body>
